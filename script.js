@@ -2,15 +2,27 @@ const lista = document.getElementById("lista");
 const resultado = document.getElementById("resultado");
 const statusEl = document.getElementById("status");
 
-
+/* =====================
+   CÁLCULO PRINCIPAL
+===================== */
 function calcular() {
-  const cliente = clienteInput.value;
-  const plano = parseFloat(planoInput.value);
-  const diasMes = parseInt(diasMesInput.value);
-  const diasUsados = parseInt(diasUsadosInput.value);
+  const cliente = document.getElementById("cliente").value.trim();
+  const plano = Number(document.getElementById("plano").value);
+  const diasMes = Number(document.getElementById("diasMes").value);
+  const diasUsados = Number(document.getElementById("diasUsados").value);
 
-  if (!cliente || !plano || !diasMes || !diasUsados) {
-    alert("Preencha todos os campos.");
+  if (
+    !cliente ||
+    isNaN(plano) || plano <= 0 ||
+    isNaN(diasMes) || diasMes <= 0 ||
+    isNaN(diasUsados) || diasUsados <= 0
+  ) {
+    alert("Preencha todos os campos corretamente.");
+    return;
+  }
+
+  if (diasUsados > diasMes) {
+    alert("Dias usados não pode ser maior que os dias do mês.");
     return;
   }
 
@@ -26,7 +38,9 @@ function calcular() {
   carregarHistorico();
 }
 
-/* HISTÓRICO */
+/* =====================
+   HISTÓRICO
+===================== */
 function carregarHistorico() {
   const dados = JSON.parse(localStorage.getItem("isp")) || [];
   lista.innerHTML = "";
@@ -35,7 +49,7 @@ function carregarHistorico() {
     const li = document.createElement("li");
     li.innerHTML = `
       <strong>${d.cliente}</strong><br>
-      Plano R$ ${d.plano} • ${d.diasUsados}/${d.diasMes} dias<br>
+      Plano R$ ${Number(d.plano).toFixed(2)} • ${d.diasUsados}/${d.diasMes} dias<br>
       <strong>R$ ${d.valor}</strong><br>
       <small>${d.data}</small>
     `;
@@ -51,24 +65,26 @@ function apagarHistorico() {
   }
 }
 
-/* STATUS ONLINE REAL */
-async function verificarConexao() {
-  try {
-    await fetch("https://www.google.com/favicon.ico", {
-      method: "HEAD",
-      mode: "no-cors",
-      cache: "no-store"
-    });
+/* =====================
+   STATUS ONLINE (SEGURO)
+===================== */
+function verificarConexao() {
+  if (navigator.onLine) {
     statusEl.innerText = "ONLINE";
     statusEl.style.background =
       "linear-gradient(135deg, #00ff9d, #00c776)";
-  } catch {
+  } else {
     statusEl.innerText = "OFFLINE";
     statusEl.style.background =
       "linear-gradient(135deg, #ff4b4b, #c90000)";
   }
 }
 
+/* =====================
+   INIT
+===================== */
+window.addEventListener("online", verificarConexao);
+window.addEventListener("offline", verificarConexao);
+
 verificarConexao();
-setInterval(verificarConexao, 5000);
 carregarHistorico();

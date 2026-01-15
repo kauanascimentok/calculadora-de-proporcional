@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Calculadora • Cobrança Proporcional</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>• Cobrança Proporcional</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="background"></div>
 
 <div class="app">
+
   <header class="top">
+  <div class="brand">
+    <img src="./assent/HARPIACALPRO.png" alt="HarpiaCalc Pro Logo" class="logo">
     <div>
-      <h1>Calculadora PRO</h1>
-      <span>Cálculo de Valor Proporcional Consumido pelo Cliente</span>
+      <h1>HarpiaCalc Pro 🦅📊</h1>
+      <span>Cálculo proporcional inteligente para provedores</span>
     </div>
-    <div class="badge">ONLINE</div>
-  </header>
+  </div>
+
+  <div id="status" class="badge">ONLINE</div>
+</header>
 
   <main>
-    <!-- CARD DE CÁLCULO -->
     <section class="card destaque">
       <h2>📡 Novo Cálculo</h2>
 
       <input id="cliente" placeholder="Nome do cliente">
       <input id="plano" type="number" placeholder="Valor do plano (R$)">
+
       <div class="grid">
         <input id="diasMes" type="number" value="30">
         <input id="diasUsados" type="number" placeholder="Dias usados">
@@ -35,7 +42,6 @@
       <div class="resultado" id="resultado">—</div>
     </section>
 
-    <!-- CARD DE HISTÓRICO -->
     <section class="card">
       <h2>📋 Histórico de Clientes</h2>
       <ul id="lista"></ul>
@@ -49,6 +55,7 @@
   <footer>
     © 2026 • Desenvolvido por <strong>Kauã</strong>
   </footer>
+
 </div>
 
 <script src="script.js"></script>

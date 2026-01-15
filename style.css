@@ -14,7 +14,6 @@ body {
   color: #fff;
 }
 
-/* Fundo artístico */
 .background {
   position: fixed;
   inset: 0;
@@ -39,6 +38,18 @@ body {
   margin-bottom: 35px;
   border-bottom: 1px solid rgba(255,213,0,0.3);
   padding-bottom: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
 }
 
 .top h1 {
@@ -95,6 +106,7 @@ main {
   background: linear-gradient(90deg, #FFD500, #FFB800);
 }
 
+/* INPUTS */
 input {
   width: 100%;
   padding: 15px;
@@ -106,8 +118,13 @@ input {
   font-size: 15px;
 }
 
-input::placeholder { color: #eee; }
-input:focus { outline: 2px solid #FFD500; }
+input::placeholder {
+  color: #eee;
+}
+
+input:focus {
+  outline: 2px solid #FFD500;
+}
 
 .grid {
   display: grid;
@@ -165,7 +182,9 @@ li {
   border-left: 4px solid #0A4CFF;
 }
 
-li strong { color: #FFD500; }
+li strong {
+  color: #FFD500;
+}
 
 .limpar {
   margin-top: 15px;
@@ -181,10 +200,48 @@ footer {
 }
 
 @keyframes subir {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 900px) {
-  main { grid-template-columns: 1fr; }
+  main {
+    grid-template-columns: 1fr;
+  }
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.logo {
+  width: 70px;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+  background: rgba(255,255,255,0.15);
+  padding: 6px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .brand {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo {
+    width: 60px;
+  }
+
+  .top h1 {
+    font-size: 26px;
+  }
 }
