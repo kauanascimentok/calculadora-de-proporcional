@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora • Cobrança Proporcional</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="background"></div>
+
+<div class="app">
+  <header class="top">
+    <div>
+      <h1>Calculadora PRO</h1>
+      <span>Cálculo de Valor Proporcional Consumido pelo Cliente</span>
+    </div>
+    <div class="badge">ONLINE</div>
+  </header>
+
+  <main>
+    <!-- CARD DE CÁLCULO -->
+    <section class="card destaque">
+      <h2>📡 Novo Cálculo</h2>
+
+      <input id="cliente" placeholder="Nome do cliente">
+      <input id="plano" type="number" placeholder="Valor do plano (R$)">
+      <div class="grid">
+        <input id="diasMes" type="number" value="30">
+        <input id="diasUsados" type="number" placeholder="Dias usados">
+      </div>
+
+      <button onclick="calcular()">Calcular cobrança</button>
+
+      <div class="resultado" id="resultado">—</div>
+    </section>
+
+    <!-- CARD DE HISTÓRICO -->
+    <section class="card">
+      <h2>📋 Histórico de Clientes</h2>
+      <ul id="lista"></ul>
+
+      <button class="limpar" onclick="apagarHistorico()">
+        🗑️ Apagar histórico
+      </button>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 • Desenvolvido por <strong>Kauã</strong>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
