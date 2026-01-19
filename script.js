@@ -21,20 +21,32 @@ function calcular() {
     return;
   }
 
-  if (diasUsados > diasMes) {
-    alert("Dias usados não pode ser maior que os dias do mês.");
-    return;
-  }
+  const valorDia = plano / diasMes;
+  const valorTotal = (valorDia * diasUsados).toFixed(2);
 
-  const valor = ((plano / diasMes) * diasUsados).toFixed(2);
+  const diasExtras =
+    diasUsados > diasMes ? diasUsados - diasMes : 0;
+
   const data = new Date().toLocaleString();
 
-  resultado.innerText = `Cliente ${cliente} • R$ ${valor}`;
+  resultado.innerHTML = `
+    💰 <strong>R$ ${valorTotal}</strong><br>
+    📅 ${diasUsados} dias utilizados<br>
+    ${diasExtras > 0 ? `⚠️ ${diasExtras} dias excedentes` : ""}
+  `;
 
   const dados = JSON.parse(localStorage.getItem("isp")) || [];
-  dados.unshift({ cliente, plano, diasMes, diasUsados, valor, data });
-  localStorage.setItem("isp", JSON.stringify(dados));
+  dados.unshift({
+    cliente,
+    plano,
+    diasMes,
+    diasUsados,
+    diasExtras,
+    valor: valorTotal,
+    data
+  });
 
+  localStorage.setItem("isp", JSON.stringify(dados));
   carregarHistorico();
 }
 
@@ -49,8 +61,10 @@ function carregarHistorico() {
     const li = document.createElement("li");
     li.innerHTML = `
       <strong>${d.cliente}</strong><br>
-      Plano R$ ${Number(d.plano).toFixed(2)} • ${d.diasUsados}/${d.diasMes} dias<br>
-      <strong>R$ ${d.valor}</strong><br>
+      Plano: R$ ${Number(d.plano).toFixed(2)}<br>
+      Uso: ${d.diasUsados} dias
+      ${d.diasExtras > 0 ? `( +${d.diasExtras} excedentes )` : ""}<br>
+      <strong>Total: R$ ${d.valor}</strong><br>
       <small>${d.data}</small>
     `;
     lista.appendChild(li);
@@ -66,7 +80,7 @@ function apagarHistorico() {
 }
 
 /* =====================
-   STATUS ONLINE (SEGURO)
+   STATUS ONLINE
 ===================== */
 function verificarConexao() {
   if (navigator.onLine) {
@@ -80,11 +94,9 @@ function verificarConexao() {
   }
 }
 
-/* =====================
-   INIT
-===================== */
 window.addEventListener("online", verificarConexao);
 window.addEventListener("offline", verificarConexao);
 
 verificarConexao();
 carregarHistorico();
+s
